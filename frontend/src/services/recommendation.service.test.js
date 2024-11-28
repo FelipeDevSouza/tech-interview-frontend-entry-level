@@ -108,7 +108,7 @@ describe('recommendationService', () => {
     expect(recommendations[0].name).toBe('RD Station Marketing');
   });
 
-  test('Retorna o último match em caso de empate para SingleProduct', () => {
+  test('Retorna o último match em caso de empate para SingleProduct quando não há funcionalidades selecionadas', () => {
     const formData = {
       selectedPreferences: [
         'Automação de marketing',
@@ -125,4 +125,71 @@ describe('recommendationService', () => {
     expect(recommendations).toHaveLength(1);
     expect(recommendations[0].name).toBe('RD Conversas');
   });
+});
+
+test('Retorna o último match em caso de empate para SingleProduct quando não há preferências selecionadas', () => {
+  const formData = {
+    selectedFeatures: [
+      'Gestão de leads e oportunidades',
+      'Recomendação de ações com base em padrões',
+    ],
+    selectedRecommendationType: 'SingleProduct',
+  };
+
+  const recommendations = recommendationService.getRecommendations(
+    formData,
+    mockProducts
+  );
+
+  expect(recommendations).toHaveLength(1);
+  expect(recommendations[0].name).toBe('RD Mentor AI');
+});
+
+test('Não deve retornar nenhum produto quando não houver nem preferências nem funcionalidades selecionadas', () => {
+  const formData = {
+    selectedRecommendationType: 'SingleProduct',
+  };
+
+  const recommendations = recommendationService.getRecommendations(
+    formData,
+    mockProducts
+  );
+
+  expect(recommendations).toHaveLength(0);
+  expect(recommendations).toEqual([]);
+});
+
+test('Não deve retornar nenhum produto quando o tipo de recomendação for inválido', () => {
+  const formData = {
+    selectedRecommendationType: 'InvalidType',
+  };
+
+  const recommendations = recommendationService.getRecommendations(
+    formData,
+    mockProducts
+  );
+
+  expect(recommendations).toHaveLength(0);
+  expect(recommendations).toEqual([]);
+});
+
+test('Não deve retornar nenhum produto quando o tipo de recomendação for informado', () => {
+  const formData = {
+    selectedPreferences: [
+      'Integração fácil com ferramentas de e-mail',
+      'Automação de marketing',
+    ],
+    selectedFeatures: [
+      'Análise de dados para insights estratégicos',
+      'Rastreamento de comportamento do usuário',
+    ],
+  };
+
+  const recommendations = recommendationService.getRecommendations(
+    formData,
+    mockProducts
+  );
+
+  expect(recommendations).toHaveLength(0);
+  expect(recommendations).toEqual([]);
 });

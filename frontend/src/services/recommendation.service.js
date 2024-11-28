@@ -5,23 +5,19 @@ const getRecommendations = (
   products
 ) => {
   const { selectedRecommendationType } = formData;
-  let recommendations = [];
+  const matches = products.filter((product) =>
+    matchRecommendations(product, formData)
+  );
 
   if (selectedRecommendationType === 'SingleProduct') {
-    const matches = products.filter((product) =>
-      matchRecommendations(product, formData)
-    );
+    const matchProduct = matches[matches.length - 1];
 
-    recommendations.push(matches[matches.length - 1]);
+    return matchProduct ? [matchProduct] : [];
   } else if (selectedRecommendationType === 'MultipleProducts') {
-    const matches = products.filter((product) =>
-      matchRecommendations(product, formData)
-    );
-
-    recommendations = matches;
+    return matches;
   }
 
-  return recommendations;
+  return [];
 };
 
 const matchRecommendations = (
