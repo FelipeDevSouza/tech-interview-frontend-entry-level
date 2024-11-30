@@ -26,7 +26,7 @@ function Form({ onRecommendationsSubmit }) {
 
   return (
     <form
-      className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md"
+      className="mx-auto p-4 bg-white border border-neutral space-y-4"
       onSubmit={handleSubmit}
     >
       <Preferences
@@ -46,7 +46,9 @@ function Form({ onRecommendationsSubmit }) {
           handleChange('selectedRecommendationType', selected)
         }
       />
-      <SubmitButton text="Obter recomendação" />
+      <div className="flex justify-end">
+        <SubmitButton text="Obter recomendação" />
+      </div>
     </form>
   );
 }
