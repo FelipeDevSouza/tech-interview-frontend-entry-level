@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MainLayout from './components/shared/MainLayout';
 import Form from './components/Form/Form';
 import RecommendationList from './components/RecommendationList/RecommendationList';
 
@@ -10,12 +11,12 @@ function App() {
    */
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-bold mb-8 text-tertiary">
+    <MainLayout>
+      <h1 className="text-3xl font-bold my-8 text-white">
         Recomendador de Produtos RD Station
       </h1>
 
-      <div className="bg-white p-8 border border-neutral w-full md:w-3/4 lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="bg-white p-8 shadow-sm w-full container grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="col-span-2 mb-4">
           <p className="text-lg">
             Bem-vindo ao Recomendador de Produtos RD Station. Aqui você pode
@@ -28,14 +29,16 @@ function App() {
             às suas necessidades.
           </p>
         </div>
-        <div>
-          <Form onRecommendationsSubmit={setRecommendations} />
-        </div>
-        <div>
-          <RecommendationList recommendations={recommendations} />
+        <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="col-span-1">
+            <Form onRecommendationsSubmit={setRecommendations} />
+          </div>
+          <div className="col-span-1">
+            <RecommendationList recommendations={recommendations} />
+          </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }
 

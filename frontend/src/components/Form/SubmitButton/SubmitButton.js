@@ -4,8 +4,8 @@ function SubmitButton({ text }) {
   return (
     <button
       type="submit"
-      className="bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 border border-black
-      uppercase"
+      className="bg-yellow-500 text-black font-bold py-2 px-4 border border-black hover:border-transparent hover:bg-yellow-400
+      uppercase transition-all"
     >
       {text}
     </button>
